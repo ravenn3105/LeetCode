@@ -1,25 +1,16 @@
 class Solution {
 public:
     vector<int> findErrorNums(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
-        vector<int> ans;
-        int i=0;
-        int a=0;
-        while (i<nums.size()){
-            if (nums[i]==nums[i+1]){
-                
-                ans.push_back(nums[i]);
-                
-                break;
-            }else{
-                i++;
-            }
-        }for(int i=1;i<=nums.size();i++){
-            if(!binary_search(nums.begin(),nums.end(),i)){
-                a=i;
-                break;
-            }
-        }ans.push_back(a);
-            return ans;
+        const int n=nums.size();
+        vector<bool> seen(n+1, 0);
+        int dup, xorSum=0;
+        for(int i=0; i<n; i++){
+            int x=nums[i];
+            if (seen[x]==1) dup=x;
+            else seen[x]=1;
+            xorSum^=(x^(i+1));//the final xorSum is mssing^dup
+        }
+        int missing=xorSum^dup;
+        return {dup, missing};
     }
 };

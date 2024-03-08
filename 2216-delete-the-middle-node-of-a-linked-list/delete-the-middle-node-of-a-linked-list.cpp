@@ -16,13 +16,18 @@ public:
         ListNode* temp1= dummy;
         ListNode* temp2= head;
         
-        while (temp2 && temp2->next){
+        while (temp2 && temp2->next && temp2->next->next){
             temp1= temp1-> next;
             temp2= temp2->next->next;
         }
-        ListNode* bleh= temp1->next;
-        temp1->next= bleh->next;
-        delete bleh;
+        ListNode* bleh;
+        if (temp2->next==NULL){
+            bleh= temp1->next;
+            temp1->next= bleh->next;
+            
+        }else if(temp2->next->next==NULL){bleh= temp1->next->next;
+        temp1->next->next= bleh->next;}
+        
         return dummy->next;
     }
 };

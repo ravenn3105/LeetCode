@@ -1,18 +1,17 @@
 class Solution {
 public:
     int maxFrequencyElements(vector<int>& nums) {
-        unordered_map<int,int> s;
-        for (auto i:nums){
-            s[i]++;
+        vector<int> v(101, 0);
+        int s=0;
+        for (auto i: nums){
+            v[i]++;
         }
-        int c=0, a=0;
-        for (auto i:s){
-            a= max(i.second, a);
-        }
-        for (auto i:s){
-            if (i.second== a){
-                c+= i.second;;
+        sort(v.begin(), v.end());
+        int z= v[v.size()-1];
+        for (int i=0; i<101; i++){
+            if (v[i]==z){
+                s+= v[i];
             }
-        }return c;
+        }return s;
     }
 };

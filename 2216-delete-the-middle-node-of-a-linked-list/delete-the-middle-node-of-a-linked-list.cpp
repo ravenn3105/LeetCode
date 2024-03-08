@@ -27,7 +27,7 @@ public:
             
         }else if(temp2->next->next==NULL){bleh= temp1->next->next;
         temp1->next->next= bleh->next;}
-        
+        delete bleh;
         return dummy->next;
     }
 };

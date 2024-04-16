@@ -12,8 +12,9 @@
 class Solution {
 public:
     TreeNode* add(TreeNode* root, int val, int d, int curr) {
-        if (!root)
-            return nullptr;
+        if (!root){
+            return NULL;
+            }
 
         if (curr == d - 1) {
             TreeNode* t1 = root->left;

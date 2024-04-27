@@ -1,46 +1,27 @@
 class Solution {
-    int ring_size;
-    unordered_map<char,vector<int>> mp;
-    int clockwise(int curr, int new_pos){
-        if(new_pos >= curr){
-            return new_pos-curr;
-        }
-        return ring_size - (curr - new_pos);
-    }
-    int anti_clockwise(int curr, int new_pos){
-        if(curr >= new_pos){
-            return curr - new_pos;
-        }
-        return ring_size - (new_pos - curr);
-    }
-    int solve(string &key, int idx, int pos, vector<vector<int>>& dp){
-        if(idx == key.size()){
-            return 0; 
-        }
-        if(dp[idx][pos] != -1){
-            return dp[idx][pos];
-        }
-        int steps = INT_MAX;
-        int key_value = key[idx];
-
-        for(int i = 0; i < mp[key_value].size(); i++){
-            int new_pos = mp[key_value][i];
-            int taken = solve(key,idx+1,new_pos,dp);
-           
-            steps = min(steps,1+clockwise(pos,new_pos)+taken);
-        
-            steps = min(steps,1+anti_clockwise(pos,new_pos)+taken);
-        }
-        return dp[idx][pos] = steps;
-    }
 public:
-    int findRotateSteps(string& ring, string& key) {
-        ring_size = ring.size();
-        for(int i = 0; i < ring_size; i++){
-            mp[ring[i]].push_back(i); 
-        }
+vector<vector<int>> dp;
+    int solve(string &ring, string & key, int ptr, int index){
+        int n=ring.size();
+        int m=key.size();
 
-        vector<vector<int>> dp(key.size(),vector<int>(ring.size(),-1));
-        return solve(key,0,0,dp);
+        if (index>=m){return 0;}
+
+        if (dp[index][ptr]!=-1){return dp[index][ptr]; }
+        int steps=1e9;
+        for (int i=0; i<n; i++){
+            if (ring[i]== key[index]){
+                steps= min(steps, min(abs(i-ptr), n-abs(i-ptr))+1+ solve(ring, key, i, index+1));
+            }
+        }
+        return dp[index][ptr]=steps;
+    }
+    int findRotateSteps(string ring, string key) {
+        int index=0, ptr=0;
+        
+        int n=ring.size();
+        int m=key.size();
+        dp.assign(m+1, vector<int>(n+1,-1));
+        return solve(ring, key, ptr,index);
     }
 };

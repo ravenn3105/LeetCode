@@ -15,21 +15,20 @@ class Solution {
     }
     int solve(string &key, int idx, int pos, vector<vector<int>>& dp){
         if(idx == key.size()){
-            return 0; //end of key
+            return 0; 
         }
         if(dp[idx][pos] != -1){
             return dp[idx][pos];
         }
         int steps = INT_MAX;
         int key_value = key[idx];
-        
-        //going to all indexes
+
         for(int i = 0; i < mp[key_value].size(); i++){
             int new_pos = mp[key_value][i];
             int taken = solve(key,idx+1,new_pos,dp);
-            //clockwise
+           
             steps = min(steps,1+clockwise(pos,new_pos)+taken);
-            //anticlockwise
+        
             steps = min(steps,1+anti_clockwise(pos,new_pos)+taken);
         }
         return dp[idx][pos] = steps;

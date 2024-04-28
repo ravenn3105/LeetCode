@@ -29,7 +29,7 @@ void dfs2(int node, int parent){
         count.resize(N);
         subTree.resize(N);
         for (int i=0; i<n; ++i){
-            graph[i]= (std::unordered_set<int>());
+            graph[i]= unordered_set<int>();
         }
         for (auto edge:edges){
             graph[edge[0]].insert(edge[1]);

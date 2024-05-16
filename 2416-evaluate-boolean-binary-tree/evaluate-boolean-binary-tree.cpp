@@ -12,9 +12,6 @@
 class Solution {
 public:
     bool evaluateTree(TreeNode* root) {
-        if (!root){
-            return true;
-        }
         if (root->left==NULL && root->right==NULL){
             if (root->val==0){
                 return false;
@@ -23,5 +20,6 @@ public:
         if (root->val==2){
             return evaluateTree(root->left) || evaluateTree(root->right);
         }else{return evaluateTree(root->left) && evaluateTree(root->right); }
+        return true;
     }
 };

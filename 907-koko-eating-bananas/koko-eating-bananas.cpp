@@ -8,7 +8,7 @@ public:
             int m= (l+r)/2;
             long long total_time= 0;
             for (auto i:piles){
-                total_time+= ceil(static_cast<double>(i)/m);
+                total_time+= (i + m-1) / m;
             }
             if (total_time<= h){
                 res=m;

@@ -1,25 +1,42 @@
 class Solution {
+    int directions[4][2] = {{1, 0}, {-1, 0}, 
+                            {0, 1}, {0, -1}};
 public:
-    void solve(int i,int j,vector<vector<char>> &grid){
-        if(i < 0||i>grid.size()-1||j<0||j>grid[0].size()-1|| grid[i][j]== '*' || grid[i][j] == '0')
-            return;
 
-        grid[i][j] = '*';
-        solve(i + 1, j, grid);
-        solve(i - 1, j, grid);
-        solve(i, j + 1, grid);
-        solve(i, j - 1, grid);
+void bfs(int r, int c, vector<vector<int>> &vis,vector<vector<char>>& grid ){
+    vis[r][c]=1;
+    queue<pair<int,int>> q;
+    q.push({r,c});
+    int n= grid.size();
+    int  m= grid[0].size();
+    while(!q.empty()){
+        auto node= q.front();
+        int row= node.first, col=node.second;
+        q.pop();
+        for (int i=0; i<4; i++){
+            int nr= row+ directions[i][0];
+            int nc= col+ directions[i][1];
+            if (nr >= 0 && nr < n && nc >= 0 && nc < m &&  
+                    !vis[nr][nc] && grid[nr][nc] == '1'){
+                q.push({nr,nc});
+                vis[nr][nc]=1;
+            }
+        }
     }
-
+        }
     int numIslands(vector<vector<char>>& grid) {
-        int p = 0;
-        for(int i = 0; i < grid.size(); i++)
-            for(int j = 0; j < grid[0].size(); j++)
-                if(grid[i][j] == '1'){
-                    p++;
-                    solve(i, j, grid);
+        int n= grid.size();
+        int  m= grid[0].size();
+        vector<vector<int>> vis(n, vector<int>(m,0));
+        int count=0;
+        for (int r=0; r<n; r++){
+            for (int c=0; c<m; c++){
+                if (grid[r][c]=='1' && !vis[r][c]){
+                    bfs(r,c,vis, grid);
+                    count++;
                 }
-
-        return p;
+            }
+        }
+        return count;
     }
 };

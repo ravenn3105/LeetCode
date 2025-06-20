@@ -9,6 +9,11 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+ // -1 we need a camera to cover the node
+ // 0 means a camera has been placed
+ // 1 means that a camera is covering that node
+
 class Solution {
     int camera=0;
 public:
@@ -30,7 +35,6 @@ public:
     int minCameraCover(TreeNode* root) {
         if (dfs(root)==-1){
             camera++;
-            return camera;
         }
         return camera;
     }

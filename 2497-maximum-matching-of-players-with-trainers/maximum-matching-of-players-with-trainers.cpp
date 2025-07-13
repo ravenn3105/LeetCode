@@ -3,15 +3,18 @@ public:
     int matchPlayersAndTrainers(vector<int>& players, vector<int>& trainers) {
         sort(players.begin(), players.end());
         sort(trainers.begin(), trainers.end());
-        int cnt=0;
+        int i=0, j=0;
         if (trainers.size()==0){
             return 0;
         }
-        for (int i=0; cnt<players.size() && i<trainers.size(); i++){
-            if (players[cnt]<= trainers[i]){
-                cnt++;
+        while(i<players.size() && j<trainers.size() ){
+            if (players[i]<= trainers[j]){
+                i++; j++;
+            }
+            else{
+                j++;
             }
         }
-        return cnt;
+        return i;
     }
 };

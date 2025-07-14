@@ -13,13 +13,20 @@ public:
 
     int getDecimalValue(ListNode* head) {
         ListNode * cur= head;
-        long long d=0;
+        // long long d=0;
+        string s="";
         while( cur!= NULL){
-            d<<=1;
-            d|= cur->val;
+            // d<<=1;
+            // d|= cur->val;
+            if (cur->val==1){
+                s+= '1';
+            }
+            else{ s+='0';}
+            
             cur= cur->next;
         }
-        return d;
+        cout<< s;
+        return stoi(s, nullptr, 2);
         
         // int num= getDecimal(d);
         

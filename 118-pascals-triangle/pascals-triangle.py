@@ -1,7 +1,7 @@
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
         res = [[1],[1,1]]
-        for i in range(numRows):
+        for i in range(numRows-2):
             cur = res[-1]
             new = []
             new.append(1)

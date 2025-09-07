@@ -5,9 +5,6 @@ public:
         for (auto i:nums){
             s.insert(i);
         }
-        if (s.size()==1){
-            return 0;
-        }
-        else{ return 1;}
+        return s.size()==1? 0:1;
     }
 };

@@ -1,17 +1,21 @@
 class Solution {
 public:
     int maxFrequencyElements(vector<int>& nums) {
-        vector<int> v(101, 0);
-        int s=0;
-        for (auto i: nums){
-            v[i]++;
+        vector<vector<int>> v(nums.size()+1);
+        map<int,int> mp;
+        for (auto i:nums){
+            mp[i]++;
         }
-        sort(v.begin(), v.end());
-        int z= v[v.size()-1];
-        for (int i=0; i<101; i++){
-            if (v[i]==z){
-                s+= v[i];
+        for (auto i:mp){
+            v[i.second].push_back(i.first);
+        }
+        int n;
+        for (int i=v.size()-1; i>0; i--){
+            if (v[i].size()!=0){
+                n= v[i].size()*i;
+                break;
             }
-        }return s;
+        }
+        return n;
     }
 };

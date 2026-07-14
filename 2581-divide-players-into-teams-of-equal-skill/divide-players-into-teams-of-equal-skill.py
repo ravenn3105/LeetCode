@@ -19,7 +19,7 @@ class Solution:
             for i,j in ls:
                 chem+= i*j 
 
-        if flag==0 and chem>0:
+        if flag==0 :
             return chem
         else:
             return -1
